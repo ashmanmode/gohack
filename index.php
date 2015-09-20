@@ -23,13 +23,34 @@
 });
 </script>
 
+<script type="text/javascript">
+$(document).ready(function(){
+    $('tr').mouseover(function(){
+        var valueOfTd = $(this).closest('tr').index();
+        var id = parseInt(parseInt(valueOfTd)/2) ;
+        //console.log(parseInt(parseInt(valueOfTd)/2)); // Do here what you want with the value.
+        xoom(id);
+        infowindow[id].open(map, markers[id]);
+    });
+    $('tr').mouseout(function(){
+        var valueOfTd = $(this).closest('tr').index();
+        var id = parseInt(parseInt(valueOfTd)/2) ;
+        //console.log(parseInt(parseInt(valueOfTd)/2)); // Do here what you want with the value.
+        map.setZoom(12);
+        infowindow[id].close(map, markers[id]);
+    });
+});
+</script>
+
 <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=places"></script>
 <script>
 var map ;
 var bounds = new google.maps.LatLngBounds();
+var infowindow = Array();
+var markers  = Array();
 function initialize() {
 
-    console.log('svsvsdvs');
+    console.log('init');
  
    var mapProp = {
  
@@ -43,14 +64,12 @@ function initialize() {
  
    map = new google.maps.Map(document.getElementById("map-canvas"),mapProp);
 
-   console.log('plotting');
-
    for(var i = 0; i < loc_lat.length ; i++ )
    {
 
         var center = new google.maps.LatLng(loc_lat[i],loc_lon[i]);
      
-       var marker=new google.maps.Marker({
+       var marker = new google.maps.Marker({
        
        position:center,
        
@@ -60,6 +79,23 @@ function initialize() {
          map.panTo(center);
          bounds.extend(center);
          map.fitBounds(bounds);
+
+         var contentS = contentString[i];
+         var info = new google.maps.InfoWindow({
+                              content: contentS
+                            });
+
+         marker.addListener('click', function() {
+                  console.log(i);
+                  info.open(map, marker);
+                });
+
+        //infowindow
+        
+
+        
+        infowindow.push(info);
+        markers.push(marker);
    }
  
  }
@@ -68,10 +104,20 @@ function initialize() {
 
 var loc_lat = Array();
 var loc_lon = Array();
- function plot(lat,lon)
+var contentString = Array();
+ function plot(lat,lon,content)
  {
   loc_lat.push(lat);
   loc_lon.push(lon);
+  contentString.push(content);
+  }
+
+  function xoom(i)
+  {
+    var center = new google.maps.LatLng(loc_lat[i],loc_lon[i]);
+    map.setZoom(14);
+    map.panTo(center);
+
   }
   
 </script>
@@ -186,7 +232,7 @@ var loc_lon = Array();
                ?>
         </select>
         </div>
-         <button class="btn waves-effect waves-light col s3" type="submit" name="submit">Search
+         <button class="btn waves-effect waves-purple col s3" type="submit" name="submit">Search
          <i class="material-icons right">send</i>
       </button>
       </div>
@@ -195,13 +241,18 @@ var loc_lon = Array();
 
     </form>
   
-        <div  class="col s4" id="map-canvas" style="height:500px">
+        <div  class="col s7" id="map-canvas" style="height:500px">
         </div> 
-        <div  class="pre-scrollable col s8" style="height:500px"> 
+        <div  class="pre-scrollable col s5" style="height:500px"> 
 
-        <table class="striped" >
+        <table class="" >
         <thead>
           <tr>
+            <td>
+              Name
+            </td>
+            <td>
+              Location</td>
           </tr>
          </thead>
          <tbody>
@@ -222,57 +273,68 @@ var loc_lon = Array();
               echo "<img src='$url' />";
               echo "</td>";
               
+              
+              $content = "'<img src=".$url." /><h3><blockquote>".$value["hotel_geo_node"]["name"]."</h3></blockquote>'";
               $lat =  $value["hotel_geo_node"]["location"]["lat"]; 
               $long = $value["hotel_geo_node"]["location"]["long"]; 
-              echo '<script>plot('.$lat.','.$long.')</script>';
+              echo '<script>plot('.$lat.','.$long.','.$content.')</script>';
 
-            echo "<td><h3><blockquote>";
+            echo "<td><blockquote>";
               echo $value["hotel_geo_node"]["name"];
-              echo "</h3></blockquote></td>";
+              echo "</blockquote></td>";
 
               
 
-              $city = $value["hotel_data_node"]["loc"]["location"];
-              echo "<td>";
-              echo $city;
-              echo "</td>";
-
+              $loc = $value["hotel_data_node"]["loc"]["location"];
               $pin = $value["hotel_data_node"]["loc"]["pin"];
-              echo "<td>";
-              echo $pin;
-              echo "</td>";
               $city = $value["hotel_data_node"]["loc"]["city"];
-              echo "<td>";
-              echo $city;
-              echo "</td>";
               $state = $value["hotel_data_node"]["loc"]["state"];
-              echo "<td>";
-              echo $state;
-              echo "</td>";
               $country = $value["hotel_data_node"]["loc"]["country"];
-              echo "<td>";
-              echo $country;
-              echo "</td>";
+              echo "<td><p>";
+              echo $loc." ".$city." ".$state." ".$country." ".$pin;
+              echo "</p></td>";
 
+              
+
+              
+              // echo "<td>";
+              // echo $pin;
+              // echo "</td>";
+              
+              // echo "<td>";
+              // echo $city;
+              // echo "</td>";
+
+              // echo "<td>";
+              // echo $state;
+              // echo "</td>";
+
+              // echo "<td>";
+              // echo $country;
+              // echo "</td>";
 
               
               echo "</tr>";
+
               echo "<tr>";
-              echo "<td>";
-              echo "Rs <span style='text-decoration: line-through;' >".
-              $price_list[$count-1][1]."</span";
-              echo "</td>";
-            echo "<td>";
+              echo "<td><div class='chip'><i class='material-icons' style='font-size:30px'>payment</i>";
+              echo "Rs <span style='text-decoration: line-through;' >".$price_list[$count-1][1]."</span>";
+              echo "</div></td>";
+
+              echo "<td><div class='chip'><i class='material-icons' style='font-size:30px'>payment</i><strong>";
               echo "Rs ".$price_list[$count-1][0];
-              echo "</td>";
+              echo "</strong></div></td>";
+
               echo "<td>";
               $price = $price_list[$count-1][1] ;
               $discounted = $price_list[$count-1][0];
-              echo "<a class='btn btn-success'
-               href='details.php?id=".$key."&&price=".$price."&&discount=".$discounted."'> Book Now </a>";
+              //echo "<a class='btn btn-success'
+               //href='details.php?id=".$key."&&price=".$price."&&discount=".$discounted."'> Book Now </a>";
+              
+
+              echo '<a class="waves-effect waves-light btn" href="details.php?id='.$key.'&&price='.$price.'&&discount='.$discounted.'">Book Now</a>';
+
               echo "</td>";
-
-
               echo "</tr>";
 
               //break;
