@@ -46,8 +46,8 @@
 
     $ch = curl_init($url);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-    curl_setopt($ch ,CURLOPT_PROXY, '10.3.100.207');
-    curl_setopt($ch, CURLOPT_PROXYPORT,'8080');
+    // curl_setopt($ch ,CURLOPT_PROXY, '10.3.100.207');
+    // curl_setopt($ch, CURLOPT_PROXYPORT,'8080');
     $page = curl_exec($ch);
     $page = json_decode($page, true);
     $page = $page["data"];
@@ -70,8 +70,8 @@
     $url = "http://developer.goibibo.com/api/voyager/?app_id=db80f519&app_key=bee575e376d1d851b3476eff19689194&method=hotels.get_hotels_data&id_list=".$ids."&id_type=_id";
     $ch = curl_init($url);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-    curl_setopt($ch ,CURLOPT_PROXY, '10.3.100.207');
-    curl_setopt($ch, CURLOPT_PROXYPORT,'8080');
+    // curl_setopt($ch ,CURLOPT_PROXY, '10.3.100.207');
+    // curl_setopt($ch, CURLOPT_PROXYPORT,'8080');
     $page = curl_exec($ch);
     $page = json_decode($page, true);
     $page = $page["data"];
