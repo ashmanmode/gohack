@@ -5999,9 +5999,10 @@ return _.node(
                                                 klasses.push( settings.klass.now )
                                             }
 
-                                            // Add the `selected` class if something's selected and the time matches.
+                                           	 // Add the `selected` class if something's selected and the time matches.
                                             if ( isSelected ) {
                                                 klasses.push( settings.klass.selected )
+                                                klasses.push( settings.close )
                                             }
 
                                             // Add the `highlighted` class if something's highlighted and the time matches.

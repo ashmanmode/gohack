@@ -13,6 +13,8 @@
    
     <link href="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/css/select2.min.css" rel="stylesheet" />
 <script src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/select2.min.js"></script>
+<link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+<link href="css/circle.css" type="text/css" rel="stylesheet" media="screen,projection"/>
 <script type="text/javascript">
   $('select').select2();
 
@@ -75,14 +77,22 @@ src="http://maps.googleapis.com/maps/api/js">
          ?>
 
 
-  <nav class="light-blue lighten-1" role="navigation">
-    <div class="nav-wrapper container"><a id="logo-container" href="index.php" class="brand-logo">GoIbibo</a>
+   <nav class="z-depth-4 ibiboheader z-depth-4" role="navigation">
+    <div class="nav-wrapper container "><a id="logo-container" href="index.php" class="brand-logo">
+      <img src="http://goibibo.ibcdn.com/styleguide/images/goLogo.png" style="width:50%">
+    </a>
       <ul class="right hide-on-med-and-down">
-        <li><a href="">Flights</a></li>
+        <li><a href="http://www.goibibo.com/flights/">Flights</a></li>
+        <li><a href="http://www.goibibo.com/bus/">Bus</a></li>
+        <li><a href="http://www.goibibo.com/holidays/holiday-packages-india/">Holidays</a></li>
+        <li><a href="http://www.goibibo.com/go/f/">Flight+Hotels</a></li>
       </ul>
 
       <ul id="nav-mobile" class="side-nav">
-        <li><a href="#">Flights</a></li>
+        <li><a href="http://www.goibibo.com/flights/">Flights</a></li>
+         <li><a href="http://www.goibibo.com/bus/">Bus</a></li>
+        <li><a href="http://www.goibibo.com/holidays/holiday-packages-india/">Holidays</a></li>
+        <li><a href="http://www.goibibo.com/go/f/">Flight+Hotels</a></li>
       </ul>
       <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
     </div>
@@ -90,9 +100,9 @@ src="http://maps.googleapis.com/maps/api/js">
  
     
 	<div class="container">
-		<h2 style="text-align:center" class="bg-success"> Welcome to my Go ibibo hackthon </h2>
 		
-		<div class="container">
+		
+		<div class="row">
 
 			<div class="row">
 				<div class="col-sm-6">
@@ -102,7 +112,7 @@ src="http://maps.googleapis.com/maps/api/js">
 				</div>
 
 				<div class="col-sm-6">
-					<h3> <?php echo $name ?> </h3>
+					<h3 class="h2"> <?php echo $name ?> </h3>
 					<h4> <?php if($price == $discount){
 							echo "<span style='font-size:3em' >Rs ".$price."</span>";
 						} else{
@@ -112,13 +122,31 @@ src="http://maps.googleapis.com/maps/api/js">
 			        		$price."</span><br />";
 			        		
 			        	
-			        		echo "<span style='font-size:3em' >Rs ".$discount."</span>";
+			        		echo "<span class='h3' >Rs ".$discount."</span>";
 							}?>
 					</h4>
 
 					<p> <?php //print_r($extra); ?> </p>
 					<p> <?php echo $extra["service"]; ?> </p>
-					<table class="table table-striped"> <?php 
+					
+
+				</div>
+			</div>
+			<div  class="row land_card">
+				<div class="row">
+
+					<div class="col-sm-4">
+						<h3 class="h3"> Places Near by </h3>
+						<table class="table table-striped"> 
+							<thead>
+								<tr>
+								<th> Place </th>
+								<th> Distance </th>
+								
+								</tr>
+							</thead>
+
+						<?php 
 
 						foreach ($extra["attractions"] as $attraction) {
 						?>
@@ -132,11 +160,12 @@ src="http://maps.googleapis.com/maps/api/js">
 						}
 
 					 ?> </table>
-
+					</div>
+					<div class="col-sm-8" style="margin-top:100px;">
+						<div id="googleMap" style="width:700px;height:400px; margin: 0 auto"></div>
+					</div>
 				</div>
-			</div>
-			<div class="row">
-			<h2 class="bg-danger" style="text-align:center">See location in  Map  </h2>
+			
 				<script>
 					var myCenter=new google.maps.LatLng(<?php echo $location["lat"]; ?>,<?php echo $location["long"]; ?>);
 
@@ -145,6 +174,10 @@ src="http://maps.googleapis.com/maps/api/js">
 					var mapProp = {
 					  center:myCenter,
 					  zoom:15,
+					   zoomControl: false,
+					  scaleControl: false,
+					  scrollwheel: false,
+					  disableDoubleClickZoom: true,
 					  mapTypeId:google.maps.MapTypeId.ROADMAP
 					  };
 
@@ -160,13 +193,13 @@ src="http://maps.googleapis.com/maps/api/js">
 					google.maps.event.addDomListener(window, 'load', initialize);
 					</script>
 
-					<div id="googleMap" style="width:800px;height:400px; margin: 0 auto"></div>
+					
 			</div>
 		
 		</div>
 
-		<div class="container">
-		<h2 class="bg-info" style="text-align:center"> Room Details </h2>
+		<div class="row" >
+		<h2 class="h2 land-card" style="text-align:center"> Room Details </h2>
 			<ul class="collapsible popout" data-collapsible="accordion"> <?php 
 							//echo "<pre>";
 							//print_r($rooms[0]);
@@ -188,6 +221,7 @@ src="http://maps.googleapis.com/maps/api/js">
 
 							</div>
 							</div>
+							</li>
 
 
 							<?php 
@@ -209,12 +243,116 @@ src="http://maps.googleapis.com/maps/api/js">
              
 		?>
 
-		<div class="container">
-		<h2 class="bg-success" style="text-align:center"> Reviews</h2>
-			<table class="table table-striped"> <?php 
+		<div class="row ">
+		<?php 
+
+					$rating = array();
+					$rating[1] = 0;
+					$rating[2] = 0;
+					$rating[3] = 0;
+					$rating[4] = 0;
+					$rating[5] = 0;
+					$sum = sizeof($reviews);
+					foreach ($reviews as $review) {
+						$rating[$review["totalRating"]] +=1;
+
+					}
+					$average = (1*$rating[1]+2*$rating[2]+3*$rating[3]+4*$rating[4]+5*$rating[5])/($sum);
+
+					//print_r($rating);
+					$average *= 100;
+
+					$average = (int)$average;
+
+					$percentage = (int)($average/5);
+
+
+					?>
+		<h2 class="h2 land-card" style="text-align:center"> Reviews</h2>
+			<div class="row">
+			<div class="col-sm-6">
+                        <h5>Based on <span itemprop="ratingCount"><?php echo $sum; ?></span> ratings</h5>
+                        <div class="reviews-true">
+                                	<span id="ratings-wrapper" class="js-pdp-nav-sec" data-link-nav="#defRevPDP" onclick="Snapdeal.pdpReview.displayReviewsWithRatingFilter(this,5,'HELPFUL');" title="Read 1962 reviews for 5-star ratings">
+	                                    <span class="lfloat">5 Star</span>
+	                                	<span class="barover review-bar" style="width:<?php echo ($rating[5]/$sum)*100;  ?>%"></span>
+	                                    <span><?php echo $rating[5]; ?></span>
+                                    </span>
+                                </div>
+                            <div class="reviews-true">
+                                	<span id="ratings-wrapper" class="js-pdp-nav-sec" data-link-nav="#defRevPDP" onclick="Snapdeal.pdpReview.displayReviewsWithRatingFilter(this,4,'HELPFUL');" title="Read 597 reviews for 4-star ratings">
+	                                    <span class="lfloat">4 Star</span>
+	                                	<span class="barover review-bar" style="width:<?php echo  ($rating[4]/$sum)*100;  ?>%"></span>
+	                                    <span><?php echo $rating[4]; ?></span>
+                                    </span>
+                                </div>
+                            <div class="reviews-true">
+                                	<span id="ratings-wrapper" class="js-pdp-nav-sec" data-link-nav="#defRevPDP" onclick="Snapdeal.pdpReview.displayReviewsWithRatingFilter(this,3,'HELPFUL');" title="Read 86 reviews for 3-star ratings">
+	                                    <span class="lfloat">3 Star</span>
+	                                	<span class="barover review-bar" style="width:<?php  echo ($rating[3]/$sum)*100;  ?>%"></span>
+	                                    <span><?php echo $rating[3]; ?></span>
+                                    </span>
+                                </div>
+                            <div class="reviews-true">
+                                	<span id="ratings-wrapper" class="js-pdp-nav-sec" data-link-nav="#defRevPDP" onclick="Snapdeal.pdpReview.displayReviewsWithRatingFilter(this,2,'HELPFUL');" title="Read 11 reviews for 2-star ratings">
+	                                    <span class="lfloat">2 Star</span>
+	                                	<span class="barover review-bar" style="width:<?php echo ($rating[2]/$sum)*100;  ?>%"></span>
+	                                    <span><?php echo $rating[2]; ?></span>
+                                    </span>
+                                </div>
+                            <div class="reviews-true">
+                                	<span id="ratings-wrapper" class="js-pdp-nav-sec" data-link-nav="#defRevPDP" onclick="Snapdeal.pdpReview.displayReviewsWithRatingFilter(this,1,'HELPFUL');" title="Read 3 reviews for 1-star ratings">
+	                                    <span class="lfloat">1 Star</span>
+	                                	<span class="barover review-bar" style="width:<?php echo ($rating[1]/$sum)*100;  ?>%"></span>
+	                                    <span><?php echo $rating[1]; ?></span>
+                                    </span>
+                                </div>
+                            </div>
+                     <div class="col-sm-6">
+                     	<h3> Avarage Rating </h3>
+                     	<div class="c100 p<?php echo $percentage; ?> medium">
+		                    <span><?php echo $average/100; ?></span>
+		                    <div class="slice">
+		                        <div class="bar"></div>
+		                        <div class="fill"></div>
+		                    </div>
+		                </div>
+                     </div>
+			<table class="table table-striped">
+			<thead>
+			<tr>
+						<th> Reviewer name </th>
+						<th> Rating </th>
+						<th> Review title </th>
+						<th> Review  </th>
+						</tr>
+			</thead>
+						 <?php 
+
+					$rating = array();
+					$rating[1] = 0;
+					$rating[2] = 0;
+					$rating[3] = 0;
+					$rating[4] = 0;
+					$rating[5] = 0;
+
+					foreach ($reviews as $review) {
+						$rating[$review["totalRating"]] +=1;
+					}
+
+					//print_r($rating);
+						$count = 0;
 							//print_r($rooms);
 						foreach ($reviews as $review) {
+							if($review["reviewTitle"] == '' &&  $review["reviewContent"] == ''){
+								continue;
+							}
+							$count +=1;
+							if($count >= 15){
+								break;
+							}
 						?>
+
 							<tr>
 							<td> <?php echo $review["reviewer"]["firstName"]." ".$review["reviewer"]["lastName"];  ?>  </td>
 							<td> <?php echo $review["totalRating"]; ?> </td> 
@@ -238,41 +376,33 @@ src="http://maps.googleapis.com/maps/api/js">
 	      
 	      
 	</div>
-	<footer class="page-footer orange">
+	</div>
+
+
+	<footer class="page-footer">
+  <div class="container">
+    <div class="row">
+      <div class="col l6 s12">
+        <h5 class="white-text">About Us</h5>
+        <p class="grey-text text-lighten-4">We are people trying to make web development and programming easy for you. We write tutorials on wide range of programming areas.Thank you for your extended support.If have any queries or want to guide us on something, feel free to contact us at contact.webtutplus@gmail.com</p>
+
+
+      </div>
+      <div class="col l3 s12">
+       
+      </div>
+      <div class="col l3 s12">
+      
+      </div>
+    </div>
+  </div>
+  <div class="footer-copyright">
     <div class="container">
-      <div class="row">
-        <div class="col l6 s12">
-          <h5 class="white-text">Company Bio</h5>
-          <p class="grey-text text-lighten-4">We are a team of college students working on this project like it's our full time job. Any amount would help support and continue development on this project and is greatly appreciated.</p>
-
-
-        </div>
-        <div class="col l3 s12">
-          <h5 class="white-text">Settings</h5>
-          <ul>
-            <li><a class="white-text" href="#!">Link 1</a></li>
-            <li><a class="white-text" href="#!">Link 2</a></li>
-            <li><a class="white-text" href="#!">Link 3</a></li>
-            <li><a class="white-text" href="#!">Link 4</a></li>
-          </ul>
-        </div>
-        <div class="col l3 s12">
-          <h5 class="white-text">Connect</h5>
-          <ul>
-            <li><a class="white-text" href="#!">Link 1</a></li>
-            <li><a class="white-text" href="#!">Link 2</a></li>
-            <li><a class="white-text" href="#!">Link 3</a></li>
-            <li><a class="white-text" href="#!">Link 4</a></li>
-          </ul>
-        </div>
-      </div>
+      Made by <a class="orange-text text-lighten-3" href="http://webtutplus.com">Webtut+</a>
     </div>
-    <div class="footer-copyright">
-      <div class="container">
-      Made by <a class="orange-text text-lighten-3" href="http://webtutplus.com">US</a>
-      </div>
-    </div>
-  </footer>
+  </div>
+</footer>
+
 
 </body>
 </html>

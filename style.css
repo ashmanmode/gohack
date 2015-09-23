@@ -12,44 +12,41 @@
 .icon-block .material-icons {
 	font-size: inherit;
 }
-.ibiboheader{
-  background-color: #19CACA ;
-}
 footer.page-footer{
 	background-color: #2A2D2E;
-	//opacity: 0.8;
-	//min-height: 350px;
+	//opacity: 0.6;
+	min-height: 350px;
 }
 
 body{
-	//font-family: "tahoma";
+	//font-family: "Proxima Nova";
+
 }
 #index-banner{
 	background-image: url("../Hotel.jpg");
-	//min-height: 600px;
-	//padding-top: 30px;
+	min-height: 600px;
+	padding-top: 30px;
 	color: white;
 }
 
-.homeSeadgdrchbar {
+.homeSearchbar {
     background-color: rgba(255,255,255,0.15);
     margin: 0 10px;
     padding: 20px;
     border-radius: 10px;
     border: thin solid rgba(255,255,255,0.5);
     padding-top: 50px;
-    width: 50%
     }
- .dateapddicker{
+ .datepicker{
  	background-color: #FFF;
  	//color: #FFF;
  }
 
- .picsddker{
+ .picker{
  	//color:#FFF;
  	font-weight: 2em;
  }
- .form-garoup{
+ .form-group{
  	font-size: 1.5em;
  }
 
@@ -62,15 +59,16 @@ body{
 
 
  .land-card{
- 	   background-color: #1fc055;
+ 	   background-color: rgba(86, 105, 212, 0.66);
  	   color: #FFF;
  }
 
  .h2 {
     font-weight: 700;
-    font-size: 40px;
+    font-size: 30px;
     line-height: 52px;
     text-transform: uppercase;
+
 }
 
  .h3 {
@@ -82,8 +80,7 @@ body{
 }
 
 
-
-    .product_review .row .barover {
+.product_review .row .barover {
     background: #f6b800;
     height: 9px;
     margin: 0 8px;
@@ -98,3 +95,4 @@ body{
     width: 100px;
     display: inline-block;
 }
+
