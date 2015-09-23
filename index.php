@@ -127,12 +127,11 @@
                 <label for="check-out">Check-Out</label>
               </div>
             </div>
-            <div class="row">
               <div class="input-field col s12 form-group">
+              <label for=""><strong></strong></label>
 
-                <label for="exampleInputEmail1"><strong>Where do want to check</strong></label>
-
-                <select class="js-example-basic-single form-control" name="city_code" required>
+                <select class="js-example-basic-single" name="city_code" required>
+                  <option value="" disabled selected> Where do want to check out  </option>
                   <?php $sql = "SELECT * FROM city";
                   $result = mysqli_query($conn, $sql);
 

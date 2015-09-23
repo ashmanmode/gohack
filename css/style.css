@@ -40,14 +40,14 @@ body{
     padding-top: 50px;
     width: 50%
     }
- .dateapddicker{
- 	background-color: #FFF;
- 	//color: #FFF;
+ .datepicker{
+    background-color: #FFF;
+    color: #000;
  }
 
- .picsddker{
- 	//color:#FFF;
- 	font-weight: 2em;
+ .picker{
+    color: #000;
+    font-weight: 2em;
  }
  .form-garoup{
  	font-size: 1.5em;
