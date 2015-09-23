@@ -16,12 +16,12 @@
   <script src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/select2.min.js"></script>
   <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
   <script type="text/javascript">
-  $('select').select2();
+    $('select').select2();
 
-  
-  $(document).ready(function() {
-    $(".js-example-basic-single").select2();
-  });
+    
+    $(document).ready(function() {
+      $(".js-example-basic-single").select2();
+    });
   </script>
 
 </head>
@@ -84,90 +84,90 @@
     <div class="nav-wrapper container "><a id="logo-container" href="index.php" class="brand-logo">
       <img src="http://goibibo.ibcdn.com/styleguide/images/goLogo.png" style="width:50%">
     </a>
-      <ul class="right hide-on-med-and-down">
-        <li><a href="http://www.goibibo.com/flights/">Flights</a></li>
-        <li><a href="http://www.goibibo.com/bus/">Bus</a></li>
-        <li><a href="http://www.goibibo.com/holidays/holiday-packages-india/">Holidays</a></li>
-        <li><a href="http://www.goibibo.com/go/f/">Flight+Hotels</a></li>
-      </ul>
+    <ul class="right hide-on-med-and-down">
+      <li><a href="http://www.goibibo.com/flights/">Flights</a></li>
+      <li><a href="http://www.goibibo.com/bus/">Bus</a></li>
+      <li><a href="http://www.goibibo.com/holidays/holiday-packages-india/">Holidays</a></li>
+      <li><a href="http://www.goibibo.com/go/f/">Flight+Hotels</a></li>
+    </ul>
 
-      <ul id="nav-mobile" class="side-nav">
-        <li><a href="http://www.goibibo.com/flights/">Flights</a></li>
-         <li><a href="http://www.goibibo.com/bus/">Bus</a></li>
-        <li><a href="http://www.goibibo.com/holidays/holiday-packages-india/">Holidays</a></li>
-        <li><a href="http://www.goibibo.com/go/f/">Flight+Hotels</a></li>
-      </ul>
-      <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
-    </div>
-  </nav>
-  <div class="section no-pad-bot" id="index-banner">
-    <div class="container">
-      <h1 class="header center " style="text-transform: uppercase;    font-weight: 700;
-      text-transform: uppercase;
-      text-shadow: 1px 1px 6px rgba(0,0,0,.2);">Searching Dream Hotels Starts Here</h1>
+    <ul id="nav-mobile" class="side-nav">
+      <li><a href="http://www.goibibo.com/flights/">Flights</a></li>
+      <li><a href="http://www.goibibo.com/bus/">Bus</a></li>
+      <li><a href="http://www.goibibo.com/holidays/holiday-packages-india/">Holidays</a></li>
+      <li><a href="http://www.goibibo.com/go/f/">Flight+Hotels</a></li>
+    </ul>
+    <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+  </div>
+</nav>
+<div class="section no-pad-bot" id="index-banner">
+  <div class="container">
+    <h1 class="header center " style="text-transform: uppercase;    font-weight: 700;
+    text-transform: uppercase;
+    text-shadow: 1px 1px 6px rgba(0,0,0,.2);">Searching Dream Hotels Starts Here</h1>
 
-    </div>
-    <br>
+  </div>
+  <br>
 
 
-    <div class="row">
-      <div class="col s6 m6" style="margin-left: 35%;width: 30%;">
-        <div class="card waves-block waves-light z-depth-4">
-          <form action="front.php" method="get" class="col s12" style="">
-           <div class="card-content white-text">
-            <div class="row">
-              <div class="input-field col s12 form-group">
-                <input id="check-in" type="date" class="datepicker" name="check_in" required>
-                <label for="check-in"><strong>Check-In</strong></label>
-              </div>
-            </div>
-            <div class="row">
-              <div class="input-field col s12 form-group">
-                <input id="check-in" type="date" class="datepicker" name="check_out" required>
-                <label for="check-out">Check-Out</label>
-              </div>
-            </div>
-              <div class="input-field col s12 form-group">
-              <label for=""><strong></strong></label>
-
-                <select class="js-example-basic-single" name="city_code" required>
-                  <option value="" disabled selected> Where do want to check out  </option>
-                  <?php $sql = "SELECT * FROM city";
-                  $result = mysqli_query($conn, $sql);
-
-                  if (mysqli_num_rows($result) > 0) {
-                  // output data of each row
-                    while($row = mysqli_fetch_assoc($result)) {
-                      ?>
-                      <option value="<?php echo $row["city_id"] ?>"><?php echo $row["city"] ?></option>
-                      <?php   
-                    }
-                  }
-                  ?>
-                </select>
-              </div>
+  <div class="row">
+    <div class="col s6 m6" style="margin-left: 35%;width: 30%;">
+      <div class="card waves-block waves-light z-depth-4">
+        <form action="front.php" method="get" class="col s12" style="">
+         <div class="card-content white-text">
+          <div class="row">
+            <div class="input-field col s12 form-group">
+              <input id="check-in" type="date" class="datepicker" name="check_in" required>
+              <label for="check-in"><strong>Check-In</strong></label>
             </div>
           </div>
+          <div class="row">
+            <div class="input-field col s12 form-group">
+              <input id="check-in" type="date" class="datepicker" name="check_out" required>
+              <label for="check-out">Check-Out</label>
+            </div>
+          </div>
+          <div class="input-field col s12 form-group">
+            <label for=""><strong></strong></label>
 
-          <div class="card-action">
+            <select class="js-example-basic-single" name="city_code" required>
+              <option value="" disabled selected> Where do want to check out  </option>
+              <?php $sql = "SELECT * FROM city";
+              $result = mysqli_query($conn, $sql);
 
-           <button class="btn waves-effect waves-purple col s12" type="submit" name="submit">Search
-             <i class="material-icons right">send</i>
-           </button>
+              if (mysqli_num_rows($result) > 0) {
+                  // output data of each row
+                while($row = mysqli_fetch_assoc($result)) {
+                  ?>
+                  <option value="<?php echo $row["city_id"] ?>"><?php echo $row["city"] ?></option>
+                  <?php   
+                }
+              }
+              ?>
+            </select>
+          </div>
+        </div>
+      </div>
 
+      <div class="card-action">
 
-         </div>
+       <button class="btn waves-effect waves-purple col s12" type="submit" name="submit">Search
+         <i class="material-icons right">send</i>
+       </button>
 
-
-
-
-         <br> </br> 
-
-       </form>
 
      </div>
-   </div>
+
+
+
+
+     <br> </br> 
+
+   </form>
+
  </div>
+</div>
+</div>
 </div>
 
 
@@ -186,7 +186,7 @@
        
       </div>
       <div class="col l3 s12">
-      
+        
       </div>
     </div>
   </div>
@@ -204,7 +204,7 @@
 <!---<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>-->
 <script type="text/javascript" src="js/materialize.min.js"></script>
 <script type="text/javascript">
-$('.datepicker').pickadate({
+  $('.datepicker').pickadate({
     selectMonths: true, // Creates a dropdown to control month
     selectYears: 15, // Creates a dropdown of 15 years to control year
   });</script>
